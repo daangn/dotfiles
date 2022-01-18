@@ -12,11 +12,22 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+OS_ARCH="$(uname -m)"
+
 if [ -f ~/.aliases ]; then
   source ~/.aliases
 fi
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin${PATH+:$PATH}"
+
+# PATH_BREW="$(echo "$PATH" | grep '/opt/homebrew/bin' | wc -l | xargs)"
+# if [ "x${PATH_BREW}" == "x0" ]; then
+#   export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+# fi
+
+if [ -d "/opt/homebrew/bin" ]; then
+  export PATH="/opt/homebrew/bin:$PATH"
+fi
 
 if [ -d "/opt/homebrew/opt/gnu-getopt/bin" ]; then
   export PATH="/opt/homebrew/opt/gnu-getopt/bin:$PATH"
@@ -44,4 +55,10 @@ if [ -d "/opt/homebrew/share/zsh-syntax-highlighting" ]; then
   source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [ -d "/usr/local/share/zsh-syntax-highlighting" ]; then
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# tfenv
+export TFENV_AUTO_INSTALL=true
+if [[ "${OS_ARCH}" == "arm64" ]]; then
+  export TFENV_ARCH=arm64
 fi
