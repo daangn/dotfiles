@@ -22,11 +22,11 @@ export PATH="$HOME/.local/bin${PATH+:$PATH}"
 
 # PATH_BREW="$(echo "$PATH" | grep '/opt/homebrew/bin' | wc -l | xargs)"
 # if [ "x${PATH_BREW}" == "x0" ]; then
-#   export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+#   export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}"
 # fi
 
 if [ -d "/opt/homebrew/bin" ]; then
-  export PATH="/opt/homebrew/bin:$PATH"
+  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 fi
 
 if [ -d "/opt/homebrew/opt/gnu-getopt/bin" ]; then
@@ -55,6 +55,12 @@ if [ -d "/opt/homebrew/share/zsh-syntax-highlighting" ]; then
   source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [ -d "/usr/local/share/zsh-syntax-highlighting" ]; then
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# pyenv
+if [ -d "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
 fi
 
 # tfenv
