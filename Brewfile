@@ -45,7 +45,6 @@ brew "zsh-syntax-highlighting"
 
 cask "1password"
 cask "aws-vault"
-cask "aws-vpn-client"
 cask "google-chrome"
 cask "iterm2"
 cask "slack"
